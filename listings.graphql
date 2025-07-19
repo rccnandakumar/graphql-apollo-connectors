@@ -1,5 +1,13 @@
 extend schema
    @link(url: "https://specs.apollo.dev/federation/v2.11", import: ["@key"])
+   @link(
+     url: "https://specs.apollo.dev/connect/v0.2"
+     import: ["@source"]
+   )
+   @source(
+    name: "listings"
+    http: { baseURL: "https://airlock-listings.demo-api.apollo.dev" }
+    )
 
 type Query {
    "A curated array of listings to feature on the homepage"
