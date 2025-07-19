@@ -33,19 +33,29 @@ type Query {
       numOfBeds
       costPerNight
       closedForBooking: closedForBookings
-      description
-      photoThumbnail
-      latitude
-      longitude
       """
-      entity: true
     )
    
 
 }
 
 "A particular intergalactic location available for booking"
-type Listing @key(fields: "id"){
+type Listing @connect(
+    source: "listings"
+    http: { GET: "/listings/{$this.id}" }
+    selection: """
+    id
+    title
+    numOfBeds
+    costPerNight
+    closedForBooking: closedForBookings
+    description
+    photoThumbnail
+    latitude
+    longitude
+    """
+  )
+  @key(fields: "id"){
   id: ID!
   "The listing's title"
   title: String!
