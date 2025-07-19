@@ -1,6 +1,6 @@
 subgraphs:
-  products:
+  listings:
     routing_url: http://ignore
     schema:
-      file: products.graphql
-federation_version: =2.10.0
+      file: listings.graphql
+federation_version: =2.11.0
