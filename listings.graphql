@@ -35,6 +35,7 @@ type Query {
       closedForBooking: closedForBookings
       """
     )
+
 }
 
 "A particular intergalactic location available for booking"
@@ -45,4 +46,23 @@ type Listing {
   numOfBeds: Int
   costPerNight: Float
   closedForBooking: Boolean
+  "The amenities available for this listing"
+  amenities: [Amenity!]!
+  @connect(
+      source: "listings"
+      http: { GET: "/listings/{$this.id}/amenities" }
+      selection: """
+      id
+      name
+      category
+      """
+    )
+}
+
+type Amenity {
+  id: ID!
+  "The amenity category the amenity belongs to"
+  category: String!
+  "The amenity's name"
+  name: String!
 }
